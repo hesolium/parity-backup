@@ -1,0 +1,9 @@
+SQLITE_SRC=/vbox-host/sqlite-build
+echo "Compile parity-backup C++ modules ..."
+g++ -I$SQLITE_SRC -O3 -Wall -Wno-stringop-truncation -c -fmessage-length=0 *.cpp
+echo -e "==================================\nCompile parity-backup C modules ..."
+gcc -O3 -Wall -c -fmessage-length=0 *.c
+echo -e "==================================\nCompile SQlite module ..."
+gcc -O3 -Wall -c -fmessage-length=0 *.c $SQLITE_SRC/sqlite3.c
+echo -e "==================================\nLinking parity-backup ..."
+g++ -o parity-backup *.o -lacl
